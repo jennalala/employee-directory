@@ -51,15 +51,20 @@ const Home = () => {
           <thead>
             <tr>
               <th scope="col">Image</th>
-              <th scope="col">Name</th>
+              <th scope="col"onClick={sortBy}>Name</th>
               <th scope="col">Phone</th>
               <th scope="col">Email</th>
               
             </tr>
           </thead>
           <tbody>
-            {employees.map((employee) => (
-              <EmployeeRow name={employee.name} phone={employee.phone} email={employee.email} picture={employee.picture} />
+          {employees.map((employee) => (
+              <EmployeeRow
+                name={employee.name}
+                phone={employee.phone}
+                email={employee.email}
+                picture={employee.picture}
+              />
             ))}
           </tbody>
         </table>
