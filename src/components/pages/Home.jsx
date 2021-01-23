@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EmployeeRow from "../components/Employee/EmployeeRow";
+import Search from "../components/Search/Search";
 
 const Home = () => {
   const [employees, setEmployees] = useState([]);
+  const [sortOrder, setSortOrder] = useState('');
 
   useEffect(() => {
     axios
@@ -18,6 +20,25 @@ const Home = () => {
         console.log(err);
       });
   }, []);
+
+  const sortBy = () => {
+    let sortedEmployees = [];
+
+    if (!sortOrder || sortOrder === "ascending") {
+      sortedEmployees = [...employees].sort((a, b) =>
+        a.name.first < b.name.first ? -1 : 1
+      );
+      setSortOrder("descending");
+    } else {
+      sortedEmployees = [...employees].sort((a, b) =>
+        a.name.first > b.name.first ? -1 : 1
+      );
+      setSortOrder("ascending");
+    }
+    console.log(sortedEmployees);
+    setEmployees(sortedEmployees);
+  };
+
   return (
     <div className="container">
       <div className="row">
