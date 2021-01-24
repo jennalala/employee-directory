@@ -7,12 +7,9 @@ import SearchBar from "../components/SearchBar/SearchBar";
 const Home = () => {
   // setting state
   const [employees, setEmployees] = useState([]);
-//   setting state for when the user sorts names
   const [sortOrder, setSortOrder] = useState("");
-//   setting state for when the user filters in search bar
   const [viewEmployees, setViewEmployees] = useState([]);
 
-  //   Initial employee render
   useEffect(() => {
     axios
       .get(
@@ -28,7 +25,6 @@ const Home = () => {
       });
   }, []);
 
-  // sort name in table
   const sortBy = () => {
     let sortedEmployees = [];
 
