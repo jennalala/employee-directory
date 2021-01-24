@@ -3,7 +3,6 @@ import React from "react";
 
 const SearchBar = (props) => {
   return (
-    //   search bar to filter employees
     <div className="create-form" style={{textAlign: "center"}}>
       <div className="input-group">
         <input

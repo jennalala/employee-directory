@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import EmployeeRow from "./components/Employee/Employee";
-import SearchBar from "./components/SearchBar/SearchBar";
+import EmployeeRow from "../components/Employee/EmployeeRow";
+import SearchBar from "../components/SearchBar/SearchBar";
 
 
 const Home = () => {
+  // setting state
   const [employees, setEmployees] = useState([]);
+//   setting state for when the user sorts names
   const [sortOrder, setSortOrder] = useState("");
+//   setting state for when the user filters in search bar
   const [viewEmployees, setViewEmployees] = useState([]);
 
+  //   Initial employee render
   useEffect(() => {
     axios
       .get(
@@ -24,6 +28,7 @@ const Home = () => {
       });
   }, []);
 
+  // sort name in table
   const sortBy = () => {
     let sortedEmployees = [];
 
@@ -42,6 +47,7 @@ const Home = () => {
     setViewEmployees([...sortedEmployees]);
   };
 
+//   filter employees on name, phone, dob and email
   const filterResults = (e) => {
     const value = e.target.value;
 
@@ -63,6 +69,7 @@ const Home = () => {
     setViewEmployees(results);
   };
 
+  //   return a table with employees information
   return (
     <div className="container">
       <div className="row">
