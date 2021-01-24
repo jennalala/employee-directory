@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const EmployeeRow = (props) => {
+const Employee = (props) => {
   return (
     <tr>
       <th scope="row">
@@ -17,4 +17,4 @@ const EmployeeRow = (props) => {
   );
 };
 
-export default EmployeeRow;
+export default Employee;

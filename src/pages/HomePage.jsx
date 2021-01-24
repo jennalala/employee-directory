@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import EmployeeRow from "../components/Employee/EmployeeRow";
-import SearchBar from "../components/SearchBar/SearchBar";
+import EmployeeRow from "./components/Employee/Employee";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 
 const Home = () => {
