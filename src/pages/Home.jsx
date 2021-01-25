@@ -1,108 +1,128 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import EmployeeRow from "../components/Employee/EmployeeRow";
-import SearchBar from "../components/SearchBar/SearchBar";
 
-
-const Home = () => {
-  // setting state
-  const [employees, setEmployees] = useState([]);
-  const [sortOrder, setSortOrder] = useState("");
-  const [viewEmployees, setViewEmployees] = useState([]);
+const Table = () => {
+  const [users, setUsers] = useState([]);
+  const [usersToDisplay, setUsersToDisplay] = useState([]);
+  const [sortDirection, setSortDirection] = useState("asc");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    axios
-      .get(
-        "https://randomuser.me/api/?results=20&inc=login,name,phone,email,picture,dob&nat=us"
-      )
-      .then((response) => {
-        console.log(response.data);
-        setEmployees(response.data.results);
-        setViewEmployees(response.data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.get("https://randomuser.me/api/?results=20").then((response) => {
+      console.log(response.data);
+      setUsersToDisplay(response.data.results);
+      setUsers(response.data.results);
+    });
   }, []);
 
-  const sortBy = () => {
-    let sortedEmployees = [];
-
-    if (!sortOrder || sortOrder === "ascending") {
-      sortedEmployees = [...employees].sort((a, b) =>
-        a.name.first < b.name.first ? -1 : 1
-      );
-      setSortOrder("descending");
-    } else {
-      sortedEmployees = [...employees].sort((a, b) =>
-        a.name.first > b.name.first ? -1 : 1
-      );
-      setSortOrder("ascending");
-    }
-    console.log(sortedEmployees);
-    setViewEmployees([...sortedEmployees]);
-  };
-
-//   filter employees on name, phone, dob and email
-  const filterResults = (e) => {
-    const value = e.target.value;
-
-    if (value === "") {
-      setViewEmployees(employees);
-      return;
-    }
-
-    const results = [...employees].filter((employee) => {
-      return (
-        employee.name.first.toLowerCase().includes(value.toLowerCase()) ||
-        employee.name.last.toLowerCase().includes(value.toLowerCase()) ||
-        employee.phone.includes(value) ||
-        employee.dob.date.includes(value) ||
-        employee.email.includes(value.toLowerCase())
-      );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const filteredUsers = users.filter((user) => {
+      return user.phone.includes(searchTerm);
     });
 
-    setViewEmployees(results);
+    setUsersToDisplay(filteredUsers);
   };
 
-  //   return a table with employees information
+  const handleReset = () => {
+    setUsersToDisplay(users);
+  };
+
+  const sortByName = () => {
+    if (sortDirection === "asc") {
+      sortByNameAsc();
+      setSortDirection("desc");
+    } else {
+      sortByNameDesc();
+      setSortDirection("asc");
+    }
+  };
+
+  const sortByNameAsc = () => {
+    const tempUsers = [...users];
+    const sortedUsers = tempUsers.sort((a, b) => {
+      const aValue = a.name.first;
+      const bValue = b.name.first;
+      if (aValue < bValue) {
+        return -1;
+      }
+      if (aValue > bValue) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(sortedUsers);
+    setUsersToDisplay(sortedUsers);
+  };
+
+  const sortByNameDesc = () => {
+    const tempUsers = [...users];
+    const sortedUsers = tempUsers.sort((a, b) => {
+      const aValue = a.name.first;
+      const bValue = b.name.first;
+      if (aValue > bValue) {
+        return -1;
+      }
+      if (aValue < bValue) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(sortedUsers);
+    setUsersToDisplay(sortedUsers);
+  };
+
   return (
-    <div className="container">
-      <div className="row">
-        <div style={{backgroundColor: "#176a83", color: "rgba(255,255,255,0.822"}} className="col">
-          <h1 className="text-center">Employee Directory</h1>
-          <h5 className="text-center">Use the search box to narrow your results or click name to sort alphabetically</h5>
-        
-        </div>
+    <div>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Enter phone number to filter"
+            name="searchTerm"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          ></input>
+          <button className="btn btn-primary">Search</button>
+          <button
+            className="btn btn-secondary"
+            onClick={handleReset}
+            type="button"
+          >
+            Reset
+          </button>
+        </form>
       </div>
-      <div className="row">
-        <div className="col-sm-4">
-          <SearchBar onChange={filterResults} />
-        </div>
-      </div>
-      <div className="row">
-        <table className="table sortable table-striped">
+      <div>
+        <table className="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Image</th>
-              <th scope="col" onClick={sortBy}>
+              <th scope="col">ID</th>
+              <th scope="col">Photo</th>
+              <th scope="col" onClick={sortByName}>
                 Name
               </th>
-              <th scope="col">Phone</th>
               <th scope="col">Email</th>
+              <th scope="col">Phone</th>
               <th scope="col">DOB</th>
             </tr>
           </thead>
           <tbody>
-            {viewEmployees.map((employee) => (
-              <EmployeeRow
-                name={employee.name}
-                phone={employee.phone}
-                email={employee.email}
-                picture={employee.picture}
-                dob={employee.dob}
-                key={employee.login.uuid}
-              />
+            {usersToDisplay.map((user, index) => (
+              <tr key={index}>
+                <th scope="row">{user.id.value}</th>
+                <td>
+                  <img src={user.picture.thumbnail} alt={user.name.first}></img>
+                </td>
+                <td>
+                  {user.name.first} {user.name.last}
+                </td>
+                <td>{user.email}</td>
+                <td>{user.phone}</td>
+                <td>{user.dob.date}</td>
+              </tr>
             ))}
           </tbody>
         </table>
