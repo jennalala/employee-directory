@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.js": "/install%20ghemployee-directory/static/js/main.7bb04dc2.chunk.js",
-    "main.js.map": "/install%20ghemployee-directory/static/js/main.7bb04dc2.chunk.js.map",
-    "runtime-main.js": "/install%20ghemployee-directory/static/js/runtime-main.fa84f0cb.js",
-    "runtime-main.js.map": "/install%20ghemployee-directory/static/js/runtime-main.fa84f0cb.js.map",
-    "static/js/2.798b607c.chunk.js": "/install%20ghemployee-directory/static/js/2.798b607c.chunk.js",
-    "static/js/2.798b607c.chunk.js.map": "/install%20ghemployee-directory/static/js/2.798b607c.chunk.js.map",
-    "index.html": "/install%20ghemployee-directory/index.html",
-    "static/js/2.798b607c.chunk.js.LICENSE.txt": "/install%20ghemployee-directory/static/js/2.798b607c.chunk.js.LICENSE.txt"
+    "main.js": "/employee-directory/static/js/main.7bb04dc2.chunk.js",
+    "main.js.map": "/employee-directory/static/js/main.7bb04dc2.chunk.js.map",
+    "runtime-main.js": "/employee-directory/static/js/runtime-main.d83a783b.js",
+    "runtime-main.js.map": "/employee-directory/static/js/runtime-main.d83a783b.js.map",
+    "static/js/2.798b607c.chunk.js": "/employee-directory/static/js/2.798b607c.chunk.js",
+    "static/js/2.798b607c.chunk.js.map": "/employee-directory/static/js/2.798b607c.chunk.js.map",
+    "index.html": "/employee-directory/index.html",
+    "static/js/2.798b607c.chunk.js.LICENSE.txt": "/employee-directory/static/js/2.798b607c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.fa84f0cb.js",
+    "static/js/runtime-main.d83a783b.js",
     "static/js/2.798b607c.chunk.js",
     "static/js/main.7bb04dc2.chunk.js"
   ]
