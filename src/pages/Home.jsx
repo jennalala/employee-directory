@@ -65,7 +65,7 @@ const Home = () => {
   return (
     <div className="container">
       <div className="row">
-        <div style={{backgroundColor: "#176a83", color: "rgba(255,255,255,0.822"}} className="col">
+        <div style={{backgroundColor: "#524440", color: "rgb(96, 4, 195"}} className="col">
           <h1 className="text-center">Employee Directory</h1>
           <h5 className="text-center">Use the search entry to narrow results or click name to sort alphabetically</h5>
         
