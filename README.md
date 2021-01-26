@@ -3,7 +3,7 @@
 # Description
 This project uses React to generate a table with employee information with components using the Random User API
 
-![Employee Directory ScreenShot](public/img/ResctEmployeeDirectoryScreenShot.png)
+![Employee Directory ScreenShot](public/img/ReactEmployeeDirectoryScreenShot.png)
 
 [Deployed Site](https://jennalala.github.io/employee-directory/)
 
